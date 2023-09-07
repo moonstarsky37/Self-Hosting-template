@@ -1,9 +1,11 @@
-name:  Build AppFlowy Application
+name: Build AppFlowy Application
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
+  # tags:
+  #   - "*"
 
 env:
   FLUTTER_VERSION: "3.10.1"
@@ -246,11 +248,11 @@ jobs:
         environment: [SUPABASE]
         job:
           - {
-            arch: x86_64,
-            target: x86_64-unknown-linux-gnu,
-            os: ubuntu-20.04,
-            flutter_profile: production-linux-x86_64,
-          }
+              arch: x86_64,
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-20.04,
+              flutter_profile: production-linux-x86_64,
+            }
     env:
       LINUX_APP_RELEASE_PATH: frontend/appflowy_flutter/product/${{ needs.create-release.outputs.version }}/linux/Release
       LINUX_PACKAGE_NAME: ${{ matrix.environment }}_AppFlowy_${{ github.ref_name }}_${{ matrix.job.os }}.deb
